@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { USER_OBJECTS } from '../../../../../assets/mock-data';
+import { USER_OBJECTS } from '../../../../../assets/mock-data';
 import { Employee } from '../../models/employee.model';
 
 @Component({
@@ -8,12 +8,13 @@ import { Employee } from '../../models/employee.model';
   styleUrl: './employee-grid.component.scss',
 })
 export class EmployeeGridComponent implements OnInit {
-  //emp_data = USER_OBJECTS;
-  emp_data = {};
+  emp_data = USER_OBJECTS;
   ngOnInit(): void {
-    //console.log('Data : ', USER_OBJECTS);
+    console.log('Data : ', this.emp_data);
   }
 
   onEdit(emp: Employee): void {}
   onDelete(emp: Employee): void {}
+  onAddReportee(emp: Employee): void {}
+  onChangeReportingLine(emp: Employee): void {}
 }

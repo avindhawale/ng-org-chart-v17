@@ -1,10 +1,4 @@
 <clr-datagrid>
-    <clr-dg-row *clrDgItems="let emp of emp_data" [clrDgItem]="emp">
-        <clr-dg-action-overflow>
-            <button class="action-item" (click)="onEdit(emp)">Edit</button>
-            <button class="action-item" (click)="onDelete(emp)">Delete</button>
-        </clr-dg-action-overflow>
-    </clr-dg-row>
 
     <clr-dg-column>Name</clr-dg-column>
     <clr-dg-column>Designation</clr-dg-column>
@@ -12,17 +6,24 @@
     <clr-dg-column>Phone</clr-dg-column>
     <clr-dg-column>Manager</clr-dg-column>
 
-    @for(emp of emp_data; track emp.id){
-    <clr-dg-cell>{{emp.name}}</clr-dg-cell>
-    <clr-dg-cell>{{emp.designation}}</clr-dg-cell>
-    <clr-dg-cell>{{emp.email}}</clr-dg-cell>
-    <clr-dg-cell>{{emp.phone}}</clr-dg-cell>
-    <clr-dg-cell>{{emp.manager || '-'}}</clr-dg-cell>
-    }
+    <clr-dg-row *clrDgItems="let emp of emp_data" [clrDgItem]="emp">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="onAddReportee(emp)">Add Reportee</button>
+            <button class="action-item" (click)="onEdit(emp)">Edit Details</button>
+            <button class="action-item" (click)="onDelete(emp)">Delete Employee</button>
+            <button class="action-item" (click)="onChangeReportingLine(emp)">Change Reporting Line</button>
+        </clr-dg-action-overflow>
+
+        <clr-dg-cell>{{emp.name}}</clr-dg-cell>
+        <clr-dg-cell>{{emp.designation}}</clr-dg-cell>
+        <clr-dg-cell>{{emp.email}}</clr-dg-cell>
+        <clr-dg-cell>{{emp.phone}}</clr-dg-cell>
+        <clr-dg-cell>{{emp.manager || '-'}}</clr-dg-cell>
+    </clr-dg-row>
 
     <clr-dg-footer>
-        <!-- <clr-dg-pagination #pagination [clrDgPageSize]="10">
-            {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} emp_data
-        </clr-dg-pagination> -->
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }}
+        </clr-dg-pagination>
     </clr-dg-footer>
 </clr-datagrid>
