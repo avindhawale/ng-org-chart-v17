@@ -1,5 +1,7 @@
 # NgOrgChartV17
 
+It is an Angular 17 application to manage and display hierarchical employee reporting information in an organization. The application provides an intuitive graphical interface, grid/table-based views, and robust functionality to manage employee relationships.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
 
 ## Development server
