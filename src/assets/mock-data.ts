@@ -8,6 +8,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'alice.johnson@gmail.com',
     phone: '+1 123-456-7890',
     manager: null,
+    parentId: null,
   },
   {
     id: '10000002',
@@ -16,6 +17,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'bob.smith@gmail.com',
     phone: '+44 234-567-8901',
     manager: '10000001',
+    parentId: '10000001',
   },
   {
     id: '10000003',
@@ -24,6 +26,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'diana.prince@gmail.com',
     phone: '+91 567-890-1234',
     manager: '10000001',
+    parentId: '10000001',
   },
   {
     id: '10000004',
@@ -32,6 +35,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'charlie.brown@gmail.com',
     phone: '+33 345-678-9012',
     manager: '10000002',
+    parentId: '10000002',
   },
   {
     id: '10000005',
@@ -40,6 +44,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'frank.castle@gmail.com',
     phone: '+49 678-901-2345',
     manager: '10000003',
+    parentId: '10000003',
   },
   {
     id: '10000006',
@@ -48,6 +53,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'eve.davis@gmail.com',
     phone: '+61 456-789-0123',
     manager: '10000004',
+    parentId: '10000004',
   },
   {
     id: '10000007',
@@ -56,6 +62,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'grace.hopper@gmail.com',
     phone: '+34 789-012-3456',
     manager: '10000005',
+    parentId: '10000005',
   },
   {
     id: '10000008',
@@ -64,6 +71,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'henry.adams@gmail.com',
     phone: '+1 890-123-4567',
     manager: '10000001',
+    parentId: '10000001',
   },
   {
     id: '10000009',
@@ -72,6 +80,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'isabel.turner@gmail.com',
     phone: '+55 901-234-5678',
     manager: '10000008',
+    parentId: '10000008',
   },
   {
     id: '10000010',
@@ -80,6 +89,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'jackie.chan@gmail.com',
     phone: '+1 123-098-7654',
     manager: '10000004',
+    parentId: '10000004',
   },
   {
     id: '10000011',
@@ -88,6 +98,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'karen.black@gmail.com',
     phone: '+44 213-456-7890',
     manager: '10000005',
+    parentId: '10000005',
   },
   {
     id: '10000012',
@@ -96,6 +107,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'larry.page@gmail.com',
     phone: '+91 345-678-9012',
     manager: '10000002',
+    parentId: '10000002',
   },
   {
     id: '10000013',
@@ -104,6 +116,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'mona.lisa@gmail.com',
     phone: '+33 456-789-0123',
     manager: '10000004',
+    parentId: '10000004',
   },
   {
     id: '10000014',
@@ -112,6 +125,7 @@ export const USER_OBJECTS: Employee[] = [
     email: 'nathan.drake@gmail.com',
     phone: '+49 567-890-1234',
     manager: '10000004',
+    parentId: '10000004',
   },
   {
     id: '10000015',
@@ -120,5 +134,6 @@ export const USER_OBJECTS: Employee[] = [
     email: 'olivia.wilde@gmail.com',
     phone: '+61 678-901-2345',
     manager: '10000003',
+    parentId: '10000003',
   },
 ];

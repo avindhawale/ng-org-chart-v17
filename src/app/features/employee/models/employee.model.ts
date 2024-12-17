@@ -5,4 +5,5 @@ export interface Employee {
   email: string;
   phone: string;
   manager: string | null; // Null for the top-level employee
+  parentId: string | null; // Null for the top-level employee
 }
