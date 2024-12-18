@@ -6,6 +6,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 
 const routes: Routes = [
   { path: '', component: EmployeeChartComponent }, // Default route (chart view)
+  { path: 'employee/:id', component: EmployeeChartComponent }, // Default route (chart view)
   { path: 'grid', component: EmployeeGridComponent }, // View employee table view
   { path: 'add', component: EmployeeFormComponent }, // Add new reportee
   { path: 'edit/:id', component: EmployeeFormComponent }, // Edit existing reportee

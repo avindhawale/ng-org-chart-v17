@@ -29,6 +29,10 @@ export class OrgChartDirective implements OnInit {
     this.updateChart();
   }
 
+  ngOnChanges(change: any) {
+    this.updateChart();
+  }
+
   @HostListener('click', ['$event']) onClick($event: any) {
     this.hideActions();
     if ($event.target.className === 'oc-actions') {
@@ -73,6 +77,10 @@ export class OrgChartDirective implements OnInit {
       .compactMarginPair((d: number) => 80)
       .onNodeClick((d: any) => {
         this.selectedNode = d.data;
+        this.onNodeClick.emit({
+          data: this.selectedNode,
+          action: 'detail',
+        });
       })
       .nodeContent((d: any, i: any, arr: any, state: any) => {
         return `<div class="clr-row">
@@ -95,7 +103,7 @@ export class OrgChartDirective implements OnInit {
                       </div>
                   </div>
                   <div class="oc-action-wrapper" id="oc-action-wrapper-${d.data.id}">
-                    <div class="oc-stack-content" data-action="add">Add Reportee - ${d.data.name}</div>
+                    <div class="oc-stack-content" data-action="add">Add Reportee</div>
                     <div class="oc-stack-content" data-action="edit">Edit Details</div>
                     <div class="oc-stack-content" data-action="delete">Delete Employee</div>
                     <div class="oc-stack-content" data-action="change">Change Reporting Line</div>

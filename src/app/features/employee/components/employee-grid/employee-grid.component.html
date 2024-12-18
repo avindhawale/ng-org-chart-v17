@@ -6,7 +6,7 @@
     <clr-dg-column>Phone</clr-dg-column>
     <clr-dg-column>Manager</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let emp of emp_data" [clrDgItem]="emp">
+    <clr-dg-row *clrDgItems="let emp of employees" [clrDgItem]="emp">
         <clr-dg-action-overflow>
             <button class="action-item" (click)="onAddReportee(emp)">Add Reportee</button>
             <button class="action-item" (click)="onEdit(emp)">Edit Details</button>
