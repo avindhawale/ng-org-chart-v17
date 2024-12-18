@@ -4,10 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
+import { OrgChartDirective } from './directives/org-chart.directive';
 
 @NgModule({
-  declarations: [HeaderComponent, NavComponent],
+  declarations: [HeaderComponent, NavComponent, OrgChartDirective],
   imports: [CommonModule, BrowserAnimationsModule, ClarityModule],
-  exports: [HeaderComponent, NavComponent],
+  exports: [HeaderComponent, NavComponent, OrgChartDirective],
 })
 export class SharedModule {}
