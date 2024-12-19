@@ -42,7 +42,7 @@ This document provides a comprehensive list of important features and functional
 
 - Modular and reusable components designed for scalability and maintainability.
 - Key Components:
-  - **Employee Grid Component**: Displays a list of employees with options to edit, delete, or search.
+  - **Employee Grid Component**: Displays a list of employees with options to edit, delete, or update.
   - **Employee Form Component**: Handles adding and updating employee details.
   - **Employee Chart Component**: Visualizes hierarchical reporting relationships using D3.js and d3-org-chart.
 
@@ -132,6 +132,13 @@ This document provides a comprehensive list of important features and functional
   - Used Jasmine and Karma for testing components and services.
 - **E2E Testing**:
   - Placeholder for Cypress or Protractor integration.
+
+---
+
+## **13. Theming with Dark and Light Mode**
+
+- **Dark Mode and Light Mode:**:
+  - Implemented theme toggling to enhance user experience using Clarity Design System.
 
 ---
 
