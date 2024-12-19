@@ -28,15 +28,33 @@ export const employeeReducer = createReducer(
     return { ...state, employees: updatedEmployees };
   }),
 
+  // Delete employee logic with reportees reassignment
   on(EmployeeActions.deleteEmployee, (state, { id }) => {
-    const updatedEmployees = state.employees.filter((e) => e.id !== id);
-    saveToLocalStorage(updatedEmployees);
-    return { ...state, employees: updatedEmployees };
+    // Find the employee to delete
+    const employeeToDelete = state.employees.find((e) => e.id === id);
+    if (!employeeToDelete) return state; // Return unchanged state if employee not found
+
+    // Update reportees to point to the deleted employee's manager
+    const updatedEmployees = state.employees.map((e) =>
+      e.manager === id
+        ? {
+            ...e,
+            manager: employeeToDelete.manager,
+            parentId: employeeToDelete.manager,
+          }
+        : e
+    );
+
+    // Remove the deleted employee
+    const finalEmployees = updatedEmployees.filter((e) => e.id !== id);
+
+    saveToLocalStorage(finalEmployees); // Save updated list to localStorage
+    return { ...state, employees: finalEmployees };
   }),
 
   on(EmployeeActions.searchEmployeeByName, (state, { name }) => {
-    const foundEmployee = state.employees.find((employee) =>
-      employee.name.toLowerCase().includes(name.toLowerCase())
+    const foundEmployee = state.employees.find(
+      (employee) => employee.name.toLowerCase() === name.toLowerCase()
     );
     return {
       ...state,

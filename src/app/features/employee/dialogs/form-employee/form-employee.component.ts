@@ -18,6 +18,7 @@ import {
 import { UtilService } from '../../../../shared/services/util.service';
 import { Observable } from 'rxjs';
 import { selectSearchResultId } from '../../store/employee/employee.selectors';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-form-employee',
@@ -39,6 +40,7 @@ export class FormEmployeeComponent {
 
   private store = inject(Store);
   private utilService = inject(UtilService);
+  private notificationService = inject(NotificationService);
 
   employeeForm: any;
   searchResultId$: Observable<string | null>;
@@ -105,6 +107,8 @@ export class FormEmployeeComponent {
         this.store.dispatch(
           updateEmployee({ employee: this.employeeForm.value as Employee })
         );
+
+        this.notificationService.showSuccess('Data is updated successfully');
       } else {
         //Add reportee
         this.searchResultId$.subscribe((id) => {
@@ -113,13 +117,19 @@ export class FormEmployeeComponent {
             parentId: id,
           });
 
-          this.employeeForm.get('id').setValue(this.utilService.randomId());
+          this.employeeForm
+            .get('id')
+            .setValue(this.utilService.randomId() + '');
           this.store.dispatch(
             addEmployee({ employee: this.employeeForm.value as Employee })
           );
           this.employeeForm.reset();
+          this.notificationService.showSuccess(
+            'Reportee is added successfully'
+          );
         });
       }
+      this.modalOpen = false;
     }
   }
 }

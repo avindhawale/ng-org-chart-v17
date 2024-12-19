@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Employee } from '../../models/employee.model';
@@ -10,7 +10,7 @@ import { selectAllEmployees } from '../../store/employee/employee.selectors';
   templateUrl: './employee-chart.component.html',
   styleUrl: './employee-chart.component.scss',
 })
-export class EmployeeChartComponent implements OnInit {
+export class EmployeeChartComponent implements OnInit, OnDestroy {
   employees: Employee[] = [];
   actions: string[] = ['add', 'edit', 'delete', 'change', 'detail'];
   empId!: string;
@@ -53,8 +53,6 @@ export class EmployeeChartComponent implements OnInit {
   }
 
   navigateToUser(event: any): void {
-    console.log('navigateToUser : ', event);
-
     switch (event.action) {
       case this.actions[0]:
         this.selectedEmployee = event.data;

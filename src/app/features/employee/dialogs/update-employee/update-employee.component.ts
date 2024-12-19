@@ -6,9 +6,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { NotificationService } from '../../../../shared/services/notification.service';
-import { EmployeeService } from '../../services/employee.service';
-import { USER_OBJECTS } from '../../../../../assets/mock-data';
+import {
+  searchEmployeeByName,
+  updateEmployee,
+} from '../../store/employee/employee.actions';
+import { selectSearchResultId } from '../../store/employee/employee.selectors';
 
 @Component({
   selector: 'app-update-employee',
@@ -18,6 +23,9 @@ import { USER_OBJECTS } from '../../../../../assets/mock-data';
 export class UpdateEmployeeComponent implements OnInit {
   @Input()
   modalOpen: boolean = true;
+
+  invalidManagerName: boolean = false;
+
   vertical = '';
   items = [
     'Alice Johnson',
@@ -34,8 +42,14 @@ export class UpdateEmployeeComponent implements OnInit {
   @Output()
   onModalChangeEvent: EventEmitter<boolean> = new EventEmitter();
 
-  private employeeService = inject(EmployeeService);
   private notificationService = inject(NotificationService);
+  private store = inject(Store);
+
+  searchResultId$: Observable<string | null>;
+
+  constructor() {
+    this.searchResultId$ = this.store.select(selectSearchResultId);
+  }
 
   ngOnInit(): void {}
   onModalChange(event: any): void {
@@ -43,15 +57,21 @@ export class UpdateEmployeeComponent implements OnInit {
   }
 
   onUpdateEmployee(): void {
-    console.log('vertical : ', this.vertical);
-
-    this.employeeService.updateEmployee(this.empData.id).subscribe({
-      next: (res) => {
-        this.modalOpen = false;
-      },
-      error: (err) => {
-        this.notificationService.showError(err);
-      },
-    });
+    if (this.vertical.length) {
+      this.store.dispatch(searchEmployeeByName({ name: this.vertical }));
+      this.searchResultId$.subscribe((id) => {
+        if (id) {
+          this.empData.manager = id;
+          this.empData.parentId = id;
+          this.store.dispatch(updateEmployee({ employee: this.empData }));
+          this.notificationService.showSuccess(
+            'Reporting Line is updated successfully'
+          );
+          this.modalOpen = false;
+        } else {
+          this.invalidManagerName = true;
+        }
+      });
+    }
   }
 }

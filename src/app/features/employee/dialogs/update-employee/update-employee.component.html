@@ -1,6 +1,16 @@
 <clr-modal [(clrModalOpen)]="modalOpen" (clrModalOpenChange)="onModalChange($event)">
     <h3 class="modal-title">Change Employee Reporting Line</h3>
     <div class="modal-body">
+        <div class="alert alert-danger" role="alert" *ngIf="invalidManagerName">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                        <cds-icon class="alert-icon" shape="exclamation-circle"></cds-icon>
+                    </div>
+                    <span class="alert-text">Employee is not available with this name.</span>
+                </div>
+            </div>
+        </div>
         <div>Reassign this employee to report to a new manager. Select the desired manager
             from the available options to update the reporting hierarchy in the organization chart.
         </div>
@@ -24,6 +34,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="modalOpen = false">CANCEL</button>
-        <button type="button" class="btn btn-primary" (click)="onUpdateEmployee()">CHANGE REPORTING</button>
+        <button type="button" class="btn btn-primary" (click)="onUpdateEmployee()" [disabled]="!vertical.length">CHANGE
+            REPORTING</button>
     </div>
 </clr-modal>
