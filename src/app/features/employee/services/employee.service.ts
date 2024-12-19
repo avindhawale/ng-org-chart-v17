@@ -15,11 +15,18 @@ export class EmployeeService {
     localStorage.setItem('employees', JSON.stringify(USER_OBJECTS));
   }
 
+  /**
+   * For enhancements like API integrations
+   */
   deleteEmployee(id: string): Observable<Employee> {
     return of({} as Employee);
   }
 
   updateEmployee(id: string): Observable<Employee> {
+    return of({} as Employee);
+  }
+
+  saveEmployees(id: string): Observable<Employee> {
     return of({} as Employee);
   }
 }
