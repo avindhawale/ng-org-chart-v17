@@ -20,6 +20,9 @@ export class EmployeeGridComponent implements OnInit, OnDestroy {
   sub: any;
   openDeleteModal: boolean = false;
   openUpdateModal: boolean = false;
+  openAddEditModal: boolean = false;
+
+  addNewReporteeFormType: boolean = true;
 
   selectedEmployee!: Employee;
 
@@ -29,12 +32,22 @@ export class EmployeeGridComponent implements OnInit, OnDestroy {
     this.selectedEmployee = this.employees[0];
   }
 
-  onEdit(emp: Employee): void {}
+  onEdit(emp: Employee): void {
+    this.selectedEmployee = emp;
+    this.openAddEditModal = true;
+    this.addNewReporteeFormType = false;
+  }
+
   onDelete(emp: Employee): void {
     this.selectedEmployee = emp;
     this.openDeleteModal = true;
   }
-  onAddReportee(emp: Employee): void {}
+  onAddReportee(emp: Employee): void {
+    this.selectedEmployee = emp;
+    this.openAddEditModal = true;
+    this.addNewReporteeFormType = true;
+  }
+
   onChangeReportingLine(emp: Employee): void {
     this.selectedEmployee = emp;
     this.openUpdateModal = true;
@@ -49,6 +62,10 @@ export class EmployeeGridComponent implements OnInit, OnDestroy {
 
   onUpdateModalChangeEvent(event: any): void {
     this.openUpdateModal = event;
+  }
+
+  onAddEditModalChangeEvent(event: any): void {
+    this.openAddEditModal = event;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

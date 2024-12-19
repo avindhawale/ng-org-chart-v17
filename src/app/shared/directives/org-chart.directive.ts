@@ -35,14 +35,20 @@ export class OrgChartDirective implements OnInit {
 
   @HostListener('click', ['$event']) onClick($event: any) {
     this.hideActions();
-    if ($event.target.className === 'oc-actions') {
-      setTimeout(() => {
-        this.toggleActions();
-      }, 0);
+    if ($event.target.className.includes('oc-actions')) {
+      this.toggleActions();
     } else if ($event.target.getAttribute('data-action')) {
       this.onNodeClick.emit({
         data: this.selectedNode,
         action: $event.target.getAttribute('data-action'),
+      });
+    } else if (
+      $event.target.className === 'o-card-header' ||
+      $event.target.className === 'card-block'
+    ) {
+      this.onNodeClick.emit({
+        data: this.selectedNode,
+        action: 'detail',
       });
     }
   }
@@ -77,10 +83,6 @@ export class OrgChartDirective implements OnInit {
       .compactMarginPair((d: number) => 80)
       .onNodeClick((d: any) => {
         this.selectedNode = d.data;
-        this.onNodeClick.emit({
-          data: this.selectedNode,
-          action: 'detail',
-        });
       })
       .nodeContent((d: any, i: any, arr: any, state: any) => {
         return `<div class="clr-row">
@@ -88,7 +90,7 @@ export class OrgChartDirective implements OnInit {
                       <div class="card">
                           <div class="o-card-header">
                             <span cds-text="section">${d.data.name}</span>
-                            <button class="btn btn-sm btn-link"><cds-icon class="oc-actions" shape="cog"></cds-icon></button>
+                            <button class="btn btn-sm btn-link oc-actions">⚙️</button>
                           </div>
                           <div class="card-block">
                               <div class="card-media-block">

@@ -1,13 +1,51 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  addEmployee,
-  removeEmployee,
-  loadEmployees,
-  loadEmployeesSuccess,
-  loadEmployeesFailure,
-} from './employee.actions';
+import * as EmployeeActions from './employee.actions';
 import { Employee } from '../../models/employee.model';
+import { initialEmployeeState } from './employee.state';
 
+const saveToLocalStorage = (employees: Employee[]) => {
+  localStorage.setItem('employees', JSON.stringify(employees));
+};
+
+export const employeeReducer = createReducer(
+  initialEmployeeState,
+  on(EmployeeActions.loadEmployees, (state) => {
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    return { ...state, employees };
+  }),
+
+  on(EmployeeActions.addEmployee, (state, { employee }) => {
+    const updatedEmployees = [...state.employees, employee];
+    saveToLocalStorage(updatedEmployees);
+    return { ...state, employees: updatedEmployees };
+  }),
+
+  on(EmployeeActions.updateEmployee, (state, { employee }) => {
+    const updatedEmployees = state.employees.map((e) =>
+      e.id === employee.id ? { ...e, ...employee } : e
+    );
+    saveToLocalStorage(updatedEmployees);
+    return { ...state, employees: updatedEmployees };
+  }),
+
+  on(EmployeeActions.deleteEmployee, (state, { id }) => {
+    const updatedEmployees = state.employees.filter((e) => e.id !== id);
+    saveToLocalStorage(updatedEmployees);
+    return { ...state, employees: updatedEmployees };
+  }),
+
+  on(EmployeeActions.searchEmployeeByName, (state, { name }) => {
+    const foundEmployee = state.employees.find((employee) =>
+      employee.name.toLowerCase().includes(name.toLowerCase())
+    );
+    return {
+      ...state,
+      searchResultId: foundEmployee ? foundEmployee.id : null,
+    };
+  })
+);
+
+/* 
 export interface EmployeeState {
   employees: Employee[];
   error: string | null;
@@ -48,4 +86,4 @@ export const employeeReducer = createReducer(
     error: error,
     status: 'error' as const,
   }))
-);
+); */

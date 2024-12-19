@@ -7,14 +7,12 @@ import { USER_OBJECTS } from '../../../../assets/mock-data';
   providedIn: 'root',
 })
 export class EmployeeService {
-  constructor() {}
-
   getEmployees(): Observable<Employee[]> {
     return of(USER_OBJECTS);
   }
 
-  saveEmployees(employees: Employee[]): Observable<Employee> {
-    return of({} as Employee);
+  saveInitialEmployees(): void {
+    localStorage.setItem('employees', JSON.stringify(USER_OBJECTS));
   }
 
   deleteEmployee(id: string): Observable<Employee> {

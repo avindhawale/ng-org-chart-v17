@@ -1,29 +1,63 @@
 <clr-modal [(clrModalOpen)]="modalOpen" (clrModalOpenChange)="onModalChange($event)">
-    <h3 class="modal-title">Change Employee Reporting Line</h3>
+    @if(formTypeNewEmp){
+    <h3 class="modal-title">Add New Reportee</h3>
+    }@else {
+    <h3 class="modal-title">Edit Details</h3>
+    }
     <div class="modal-body">
-        <div>Reassign this employee to report to a new manager. Select the desired manager
-            from the available options to update the reporting hierarchy in the organization chart.
+        @if(formTypeNewEmp){
+        <div>Add a new employee who will report directly to this person.
+            Provide detail like name, designation, email and phone to create
+            their profile in the organization chart.
         </div>
-        <div class="oc-modal-sub-content">
-            <span cds-text="semibold">Employee Name </span>
-            <span cds-text="medium">{{empData.name}}</span>
-        </div>
-        <div class="oc-modal-sub-content">
-            <span cds-text="semibold">Manager Name </span>
-            <form clrForm>
-                <clr-datalist-container>
-                    <input clrDatalistInput placeholder="Select New Reporting Manager" name="Option" required
-                        [(ngModel)]="vertical" />
-                    <datalist>
-                        <option *ngFor="let item of items" [value]="item"></option>
-                    </datalist>
-                    <clr-control-error>There was an error</clr-control-error>
-                </clr-datalist-container>
-            </form>
-        </div>
+        }
+        <form clrForm [formGroup]="employeeForm" clrLayout="horizontal">
+            <clr-input-container>
+                <label>Manager Namer</label>
+                <input clrInput type="text" formControlName="manager" readonly />
+            </clr-input-container>
+            <clr-input-container>
+                <label class="clr-required-mark">Employee Name</label>
+                <input clrInput type="text" formControlName="name" placeholder="Enter Employee Name" />
+                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+            </clr-input-container>
+            <clr-datalist-container>
+                <label class="clr-required-mark">Designation</label>
+                <input clrDatalistInput placeholder="Select New Reporting Manager" name="Option" required
+                    formControlName="designation" />
+                <datalist>
+                    <option *ngFor="let item of designations" [value]="item"></option>
+                </datalist>
+                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+            </clr-datalist-container>
+            <clr-input-container>
+                <label class="clr-required-mark">Email ID</label>
+                <input clrInput type="email" formControlName="email" placeholder="Enter Email ID" />
+                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                <clr-control-error *clrIfError="'pattern'; error as err">
+                    Invalid email
+                </clr-control-error>
+            </clr-input-container>
+            <clr-input-container>
+                <label class="clr-required-mark">Phone Number</label>
+                <input clrInput type="text" formControlName="phone" placeholder="Enter Phone Number" minlength="10"
+                    maxlength="13" />
+                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                <clr-control-error *clrIfError="'pattern'; error as err">
+                    Invalid number
+                </clr-control-error>
+            </clr-input-container>
+            <input clrInput type="hidden" formControlName="id" />
+            <input clrInput type="hidden" formControlName="parentId" />
+        </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="modalOpen = false">CANCEL</button>
-        <button type="button" class="btn btn-primary" (click)="onAddEditEmployee()">CHANGE REPORTING</button>
+        @if(formTypeNewEmp){
+        <button type="button" class="btn btn-primary" (click)="onAddEditEmployee()">ADD REPORTEE</button>
+        }@else {
+        <button type="button" class="btn btn-primary" (click)="onAddEditEmployee()">SAVE</button>
+        }
+
     </div>
 </clr-modal>

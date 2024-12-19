@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import { SharedModule } from '../../shared/shared.module';
@@ -26,6 +26,7 @@ import { UpdateEmployeeComponent } from './dialogs/update-employee/update-employ
     ClarityModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class EmployeeModule {}

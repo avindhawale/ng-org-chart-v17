@@ -29,11 +29,19 @@
     </clr-dg-footer>
 </clr-datagrid>
 
-
+<!-- Delete dialog -->
 <app-delete-employee [modalOpen]="openDeleteModal" (onModalChangeEvent)="onDeleteModalChangeEvent($event)"
     [empData]="selectedEmployee">
 </app-delete-employee>
 
+<!-- Update Reporting dialog -->
 <app-update-employee [modalOpen]="openUpdateModal" (onModalChangeEvent)="onUpdateModalChangeEvent($event)"
     [empData]="selectedEmployee">
 </app-update-employee>
+
+<!-- Employee form dialog -->
+@if(openAddEditModal){
+<app-form-employee [modalOpen]="openAddEditModal" [formTypeNewEmp]="addNewReporteeFormType"
+    (onModalChangeEvent)="onAddEditModalChangeEvent($event)" [empData]="selectedEmployee">
+</app-form-employee>
+}
