@@ -5,4 +5,13 @@
             <span class="title">Hierarchical Organization Chart</span>
         </a>
     </div>
+    <div class="header-actions">
+        <clr-toggle-container clrInline>
+            <clr-toggle-wrapper>
+                <input type="checkbox" clrToggle name="options" required value="option1" [(ngModel)]="darkMode"
+                    (change)="onToggle()" />
+                <label>Dark mode</label>
+            </clr-toggle-wrapper>
+        </clr-toggle-container>
+    </div>
 </header>
