@@ -9,6 +9,8 @@ import { AddEmployeeComponent } from './dialogs/add-employee/add-employee.compon
 import { DeleteEmployeeComponent } from './dialogs/delete-employee/delete-employee.component';
 import { UpdateEmployeeComponent } from './dialogs/update-employee/update-employee.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FormsModule } from '@angular/forms';
+import { FormEmployeeComponent } from './dialogs/form-employee/form-employee.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,14 @@ import { SharedModule } from '../../shared/shared.module';
     UpdateEmployeeComponent,
     AddEmployeeComponent,
     EmployeeFormComponent,
+    FormEmployeeComponent,
   ],
-  imports: [CommonModule, BrowserAnimationsModule, ClarityModule, SharedModule],
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    ClarityModule,
+    SharedModule,
+    FormsModule,
+  ],
 })
 export class EmployeeModule {}

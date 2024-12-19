@@ -1,0 +1,7 @@
+@if(alert && alert.message){
+<clr-alert [clrAlertType]="alert.type" [clrAlertAppLevel]="true">
+    <clr-alert-item>
+        <span class="alert-text">{{alert.message}}</span>
+    </clr-alert-item>
+</clr-alert>
+}

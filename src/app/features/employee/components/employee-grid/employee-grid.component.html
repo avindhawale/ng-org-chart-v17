@@ -12,6 +12,7 @@
             <button class="action-item" (click)="onEdit(emp)">Edit Details</button>
             <button class="action-item" (click)="onDelete(emp)">Delete Employee</button>
             <button class="action-item" (click)="onChangeReportingLine(emp)">Change Reporting Line</button>
+            <button class="action-item" (click)="onViewChart(emp)">View Chart</button>
         </clr-dg-action-overflow>
 
         <clr-dg-cell>{{emp.name}}</clr-dg-cell>
@@ -27,3 +28,12 @@
         </clr-dg-pagination>
     </clr-dg-footer>
 </clr-datagrid>
+
+
+<app-delete-employee [modalOpen]="openDeleteModal" (onModalChangeEvent)="onDeleteModalChangeEvent($event)"
+    [empData]="selectedEmployee">
+</app-delete-employee>
+
+<app-update-employee [modalOpen]="openUpdateModal" (onModalChangeEvent)="onUpdateModalChangeEvent($event)"
+    [empData]="selectedEmployee">
+</app-update-employee>

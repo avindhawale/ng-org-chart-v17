@@ -16,4 +16,12 @@ export class EmployeeService {
   saveEmployees(employees: Employee[]): Observable<Employee> {
     return of({} as Employee);
   }
+
+  deleteEmployee(id: string): Observable<Employee> {
+    return of({} as Employee);
+  }
+
+  updateEmployee(id: string): Observable<Employee> {
+    return of({} as Employee);
+  }
 }

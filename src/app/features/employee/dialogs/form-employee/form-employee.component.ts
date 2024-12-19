@@ -1,21 +1,13 @@
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { EmployeeService } from '../../services/employee.service';
-import { USER_OBJECTS } from '../../../../../assets/mock-data';
 
 @Component({
-  selector: 'app-update-employee',
-  templateUrl: './update-employee.component.html',
-  styleUrl: './update-employee.component.scss',
+  selector: 'app-form-employee',
+  templateUrl: './form-employee.component.html',
+  styleUrl: './form-employee.component.scss',
 })
-export class UpdateEmployeeComponent implements OnInit {
+export class FormEmployeeComponent {
   @Input()
   modalOpen: boolean = true;
   vertical = '';
@@ -42,7 +34,7 @@ export class UpdateEmployeeComponent implements OnInit {
     this.onModalChangeEvent.emit(event);
   }
 
-  onUpdateEmployee(): void {
+  onAddEditEmployee(): void {
     console.log('vertical : ', this.vertical);
 
     this.employeeService.updateEmployee(this.empData.id).subscribe({

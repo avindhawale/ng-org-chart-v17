@@ -22,7 +22,7 @@ export class EmployeeChartComponent implements OnInit {
   private store = inject(Store);
   public allEmployees$ = this.store.select(selectAllEmployees);
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.subRout$ = this.activeRouter.paramMap.subscribe((params) => {
       this.empId = params.get('id')!;
       this.employees = [];

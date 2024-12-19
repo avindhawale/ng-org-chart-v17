@@ -1,1 +1,17 @@
-<p>delete-employee works!</p>
+<clr-modal [(clrModalOpen)]="modalOpen" (clrModalOpenChange)="onModalChange($event)">
+    <h3 class="modal-title">Delete Employee</h3>
+    <div class="modal-body">
+        <div>Deleting this employee will reassign all their direct reportees to the employee's manager.
+            Confirm this action to remove the employee from the organization chart and update the reporting
+            hierarchy accordingly.
+        </div>
+        <div class="oc-modal-sub-content">
+            <span cds-text="semibold">Employee Name </span>
+            <span cds-text="medium">{{empData.name}}</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="modalOpen = false">CANCEL</button>
+        <button type="button" class="btn btn-danger" (click)="onRemoveEmployee()">DELETE</button>
+    </div>
+</clr-modal>

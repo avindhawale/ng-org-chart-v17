@@ -2,6 +2,9 @@
   <app-header></app-header>
   <div class="content-container">
     <div class="content-area">
+      @if(alert && alert.message){
+      <app-alert [alert]="alert"></app-alert>
+      }
       <app-nav></app-nav>
       <router-outlet></router-outlet>
     </div>
