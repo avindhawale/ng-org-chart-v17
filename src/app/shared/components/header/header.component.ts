@@ -8,12 +8,9 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   darkMode = true;
   onToggle(): void {
+    // Toggle the theme based on the current value of darkMode
     this.darkMode
-      ? document
-          .getElementsByTagName('body')[0]
-          .setAttribute('cds-theme', 'dark')
-      : document
-          .getElementsByTagName('body')[0]
-          .setAttribute('cds-theme', 'light');
+      ? document.body.setAttribute('cds-theme', 'dark')
+      : document.body.setAttribute('cds-theme', 'light');
   }
 }

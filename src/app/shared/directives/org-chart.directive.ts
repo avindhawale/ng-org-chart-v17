@@ -14,35 +14,48 @@ import { Employee } from '../../features/employee/models/employee.model';
   selector: '[orgChart]',
 })
 export class OrgChartDirective implements OnInit {
-  chart: any;
-  selectedNode: any;
+  chart: any; // Holds the OrgChart instance
+  selectedNode: any; // Stores the currently selected node in the chart
 
+  // Input to accept employee data for rendering the chart
   @Input()
   data: Employee[] | undefined;
 
+  // Output event emitter to notify parent components when a node is clicked
   @Output()
   onNodeClick: EventEmitter<any> = new EventEmitter();
 
   constructor(private ele: ElementRef) {}
 
   ngOnInit(): void {
-    this.updateChart();
+    this.updateChart(); // Render the chart with the initial data
   }
 
   ngOnChanges(change: any) {
-    this.updateChart();
+    this.updateChart(); // Re-render the chart if the data changes
   }
 
+  /**
+   * Host listener to handle click events on the chart.
+   * - Toggles action menus or emits events for specific node actions.
+   * @param $event - The click event object
+   */
   @HostListener('click', ['$event']) onClick($event: any) {
-    this.hideActions();
+    this.hideActions(); // Hide any open action menus
+
+    // Check if the clicked target is an action button
     if ($event.target.className.includes('oc-actions')) {
-      this.toggleActions();
-    } else if ($event.target.getAttribute('data-action')) {
+      this.toggleActions(); // Toggle visibility of the action menu
+    }
+    // Handle specific action buttons within the action menu
+    else if ($event.target.getAttribute('data-action')) {
       this.onNodeClick.emit({
         data: this.selectedNode,
         action: $event.target.getAttribute('data-action'),
       });
-    } else if (
+    }
+    // Handle clicks on node headers or card blocks to show details
+    else if (
       $event.target.className === 'o-card-header' ||
       $event.target.className === 'card-block'
     ) {
@@ -53,22 +66,32 @@ export class OrgChartDirective implements OnInit {
     }
   }
 
+  /**
+   * Toggles the visibility of the action menu for the selected node.
+   */
   toggleActions(): void {
     const element = document.getElementById(
       'oc-action-wrapper-' + this.selectedNode.id
     );
-    element?.classList.toggle('oc-action-wrapper-show');
+    element?.classList.toggle('oc-action-wrapper-show'); // Show/hide the action menu
   }
 
+  /**
+   * Hides all open action menus in the chart.
+   */
   hideActions(): void {
     const elements: any = document.getElementsByClassName(
       'oc-action-wrapper-show'
     );
     for (let elem of elements) {
-      elem.classList.remove('oc-action-wrapper-show');
+      elem.classList.remove('oc-action-wrapper-show'); // Remove the 'show' class
     }
   }
 
+  /**
+   * Updates and renders the OrgChart with the provided data.
+   * - Configures the chart's dimensions and content templates.
+   */
   updateChart() {
     this.chart = new OrgChart();
     this.chart
@@ -85,6 +108,7 @@ export class OrgChartDirective implements OnInit {
         this.selectedNode = d.data;
       })
       .nodeContent((d: any, i: any, arr: any, state: any) => {
+        // Define the content template for each node
         return `<div class="clr-row">
                   <div class="clr-col-lg-12 clr-col-12">
                       <div class="card">

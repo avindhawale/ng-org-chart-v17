@@ -1,6 +1,11 @@
 <clr-modal [(clrModalOpen)]="modalOpen" (clrModalOpenChange)="onModalChange($event)">
+
+    <!-- Modal Title -->
     <h3 class="modal-title">Change Employee Reporting Line</h3>
+
     <div class="modal-body">
+        <!-- Error Alert -->
+        <!-- Displays an error message if no valid manager name is available -->
         <div class="alert alert-danger" role="alert" *ngIf="invalidManagerName">
             <div class="alert-items">
                 <div class="alert-item static">
@@ -11,13 +16,21 @@
                 </div>
             </div>
         </div>
-        <div>Reassign this employee to report to a new manager. Select the desired manager
+
+        <!-- Modal Description -->
+        <div>
+            Reassign this employee to report to a new manager. Select the desired manager
             from the available options to update the reporting hierarchy in the organization chart.
         </div>
+
+        <!-- Display Employee Name -->
         <div class="oc-modal-sub-content">
             <span cds-text="semibold">Employee Name </span>
             <span cds-text="medium">{{empData.name}}</span>
+            <!-- empData.name: The name of the employee being reassigned -->
         </div>
+
+        <!-- Manager Selection Input -->
         <div class="oc-modal-sub-content">
             <span cds-text="semibold">Manager Name </span>
             <form clrForm #form>
@@ -32,9 +45,14 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal Footer -->
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="modalOpen = false">CANCEL</button>
-        <button type="button" class="btn btn-primary" (click)="onUpdateEmployee()" [disabled]="!vertical.length">CHANGE
-            REPORTING</button>
+
+        <!-- Change Reporting Button -->
+        <button type="button" class="btn btn-primary" (click)="onUpdateEmployee()" [disabled]="!vertical.length">
+            CHANGE REPORTING
+        </button>
     </div>
 </clr-modal>
